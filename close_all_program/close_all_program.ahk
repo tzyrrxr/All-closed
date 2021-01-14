@@ -10,16 +10,16 @@ DetectHiddenWindows, Off
 gui, color, black
 gui, font, s12, KaiTi
 gui, add, button, w80 x10 y10 gedit_, &Edit
-gui, add, button, w80 x+15 gclose_sleep, &Sleep
-gui, add, button, w80 x10 gclose_shutdown, Shut&down
-gui, add, button, w80 x+15 gclose_reboot, &Reboot
-gui, add, button, w80 x10 gclose_, &Close All
-gui, add, button, w80 x+15 gclose_except_win, Exce&pt
-gui, add, button, w80 x10 gclose_cancel Default, Cance&l
+gui, add, button, w80 x+10 gclose_sleep, &Sleep
+gui, add, button, w80 x10 gclose_hibernate, &Hibernate
+gui, add, button, w80 x+10 gclose_shutdown, Shut&down
+gui, add, button, w80 x10 gclose_reboot, &Reboot
+gui, add, button, w80 x+10 gclose_, &Close All
+gui, add, button, w80 x10 gclose_except_win, Exce&pt
+gui, add, button, w80 x+10 gclose_cancel Default, Cance&l
 ;guicontrol, +BackgroundWhite, Button
 gui,-Caption
 gui, show,,Quick Setting
-
 
 ;--------------------   except close
 
@@ -83,6 +83,12 @@ p::
 	tooltip,
 	return
 #if
+;--------------------   Hibernate
+close_hibernate:
+	gui, destroy
+	DllCall("PowrProf\SetSuspendState", "int", 1, "int", 0, "int", 0)
+	exitapp
+	return
 /*
 guiclose:
 	exitapp
@@ -96,7 +102,12 @@ edit_:
 		WinActivate, close_all_program.ahk
 	}
 	else{
-		run, gVim.exe "close_all_program.ahk", ,Max
+		try{
+			run, gVim.exe "close_all_program.ahk", ,Max
+		}
+		catch{
+			run, notepad.exe "close_all_program.ahk", ,Max
+		}
 	}
 	exitapp
 	return
