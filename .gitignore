@@ -1,4 +1,6 @@
-~
-un~
-.swp
+*~
+*un~
+*.swp
 backup
+pull.bat
+update_to_github.bat
