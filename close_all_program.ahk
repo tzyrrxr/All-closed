@@ -25,6 +25,10 @@ gui, show,,Quick Setting
 
 except := []
 return
+
+
+
+
 close_except_win:
 	settimer, auto_close, delete
 	gui, hide
@@ -89,11 +93,6 @@ close_hibernate:
 	DllCall("PowrProf\SetSuspendState", "int", 1, "int", 0, "int", 0)
 	exitapp
 	return
-/*
-guiclose:
-	exitapp
-	return
-*/
 edit_:
 	try{
 		run, ".\"
@@ -117,6 +116,7 @@ close_:
 	;gosub, close_all
 	exitapp
 	return
+
 close_shutdown:
 	;Menu, Tray, NoIcon
 	close_all_all()
@@ -129,6 +129,7 @@ close_shutdown:
 	}
 	shutdown, 1
 	return
+
 close_reboot:
 	Menu, Tray, NoIcon
 	close_all_all()
