@@ -97,15 +97,15 @@ edit_:
 	try{
 		run, ".\"
 	}
-	if WinExist("close_all_program.ahk"){
-		WinActivate, close_all_program.ahk
+	if WinExist("exitThem.ahk"){
+		WinActivate, exitThem.ahk
 	}
 	else{
 		try{
-			run, gVim.exe "close_all_program.ahk", ,Max
+			run, gVim.exe "exitThem.ahk", ,Max
 		}
 		catch{
-			run, notepad.exe "close_all_program.ahk", ,Max
+			run, notepad.exe "exitThem.ahk", ,Max
 		}
 	}
 	exitapp
